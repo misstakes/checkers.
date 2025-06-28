@@ -1,0 +1,27 @@
+<!-- client/test-payment.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Test M-Pesa STK Push</title>
+</head>
+<body>
+  <h1>Test M-Pesa STK Push (Sandbox)</h1>
+  <button id="sendBtn">Send Test STK Push</button>
+  <pre id="output"></pre>
+
+  <script>
+    document.getElementById('sendBtn').onclick = async () => {
+      const out = document.getElementById('output');
+      out.textContent = 'Sending...';
+      try {
+        const res = await fetch('/api/test-pay', { method: 'POST' });
+        const data = await res.json();
+        out.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        out.textContent = 'Error: ' + err;
+      }
+    };
+  </script>
+</body>
+</html>
